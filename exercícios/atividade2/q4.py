@@ -17,7 +17,7 @@ def ordenar_lista(string):
     res = ''.join(lista) #transforma a lista em string
     return res # retorna a string ordenada
 
-lista = "374y38"
+lista = "saul"
 # chama a função ordenar_lista
 res = ordenar_lista(lista)
 # imprime a lista ordenada alfabeticamente
