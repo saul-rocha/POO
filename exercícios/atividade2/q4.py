@@ -9,7 +9,7 @@ def ordenar_lista(string):
         for j in range(i):
         # o "if" testa se a string acessada pelo índice (j + 1)
         # precede a string acessada pelo índice "j"
-            if(lista[j] > lista[j + 1]):
+            if(lista[j].upper() > lista[j + 1].upper()):
                 # faz a troca dos elementos
                 aux = lista[j]
                 lista[j] = lista[j + 1]
