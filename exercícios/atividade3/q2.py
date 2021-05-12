@@ -43,4 +43,4 @@ while True:
         else:
             print("Não encontrado!")
     elif esc == 0:
-        break;
+        break
