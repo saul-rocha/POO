@@ -3,6 +3,7 @@ from src.alunos import Alunos
 class Turma:
     def __init__(self):
         self._turma = {}
+        self.flag = 0
 
     @property
     def turma(self):
@@ -14,12 +15,16 @@ class Turma:
         self._turma[matricula] = a
     ##encerra a turma
     def encerramento_turma(self, lista_res):
+        if self.flag == 0:
+            for key, a in self._turma.items():
+                lista_res.append(a.nome)
+                lista_res.append(a.media())
+                self.flag = 1
+                res = 1 ## retorna 1 para confirmar a execução da função
+        else:
+            res = 0
 
-        for key, a in self._turma.items():
-            lista_res.append(a.nome)
-            lista_res.append(a.media())
-
-        return 1 ## retorna 1 para confirmar a execução da função
+        return res
 
     def listagem_alunos(self, lista_alunos, verifica):
         if(verifica):##verifica se ja foi chamada a função encerramento
