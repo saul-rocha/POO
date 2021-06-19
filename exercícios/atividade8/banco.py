@@ -34,8 +34,6 @@ class Banco:
         return self._lista_historico_tributacoes
 
 
-    def get_cliente(self, cpf):
-        return self._lista_clientes.get(cpf)
 
     def mostrar_clientes(self):
         for key, cliente in self._lista_clientes.items():

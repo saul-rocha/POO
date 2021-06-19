@@ -55,7 +55,7 @@ def cadastrar_conta_corrente():
     numero = input("Numero da Conta: ")
     saldo = float(input("Saldo da Conta: "))
     limite = float(input("Limite: "))
-    cc = ContaCorrente(banco.get_cliente(cpf), numero, saldo, limite)
+    cc = ContaCorrente(banco.banco.lista_clientes(cpf), numero, saldo, limite)
     banco.adicionar_conta_corrente(cc)
     print("Conta Corrente Criada Com Sucesso!")
 
@@ -68,7 +68,7 @@ def cadastrar_conta_poupanca():
     numero = input("Numero da Conta: ")
     saldo = float(input("Saldo da Conta: "))
 
-    cp = ContaPoupanca(banco.get_cliente(cpf), numero, saldo)
+    cp = ContaPoupanca(banco.lista_clientes(cpf), numero, saldo)
     banco.adicionar_conta_poupanca(cp)
     print("Conta Poupança Criada Com Sucesso!")
 

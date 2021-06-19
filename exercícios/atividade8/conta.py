@@ -2,9 +2,10 @@ import abc
 from pessoa import Cliente
 from historico import Historico
 
-class Conta(abc.ABC, Cliente):
-    def __init__(self, titular):
-        Cliente.__init__(titular.pessoa, titular.profissao, titular.renda)
+class Conta(abc.ABC):
+    def __init__(self, numero, saldo):
+        self._numero = numero
+        self._saldo = saldo
         self._historico = Historico()
 
 
@@ -27,9 +28,10 @@ class Conta(abc.ABC, Cliente):
     def transferir(self):
         pass
 
-class ContaCorrente(Conta):
-    def __init__(self, titular, numero, saldo, limite):
-        Conta.__init__(titular)
+class ContaCorrente(Conta, Cliente):
+    def __init__(self, cliente, numero, saldo, limite):
+        Conta.__init__(numero, saldo, limite)
+        Cliente.__init__(cliente.pessoa, cliente.profissao, cliente.renda)
         self._numero = numero
         self._saldo = saldo
         self._limite = limite
@@ -83,11 +85,11 @@ class ContaCorrente(Conta):
 
 
 class ContaPoupanca(Conta):
-    def __init__(self, titular, numero, saldo, limite):
-        Conta.__init__(titular)
+    def __init__(self, cliente, numero, saldo, limite):
+        Conta.__init__(numero, saldo, limite)
+        Cliente.__init__(cliente.pessoa, cliente.profissao, cliente.renda)
         self._numero = numero
         self._saldo = saldo
-        self._limite = limite
         self._tipo = "Conta Poupança"
 
     @property
