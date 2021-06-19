@@ -15,3 +15,46 @@ class Pessoa:
     @property
     def dt_nascimento(self):
         return self._dt_nascimento
+
+    def mostrar_pessoa(self):
+        print("Nome:", self.nome)
+        print("CPF:", self.cpf)
+        print("Data de Nascimento:", self.dt_nascimento)
+
+class Funcionario(Pessoa):
+    def __init__(self, pessoa, salario):
+        super().__init__(pessoa.nome, pessoa.cpf, pessoa.dt_nascimento)
+        self._salario = salario
+
+    @property
+    def salario(self):
+        return self._salario
+
+    def mostrar_funcionario(self):
+        print("Nome:", self.nome)
+        print("CPF:", self.cpf)
+        print("Data de Nascimento:", self.dt_nascimento)
+        print("Salario:", self.salario)
+
+
+class Cliente(Pessoa):
+    def __init__(self, pessoa, profissao, renda):
+        super().__init__(pessoa.nome, pessoa.cpf, pessoa.dt_nascimento)
+        self._profissao = profissao
+        self._renda = renda
+
+    @property
+    def profissao(self):
+        return self._profissao
+
+    @property
+    def renda(self):
+        return self._renda
+
+    def mostrar_cliente(self):
+        print("Nome:", self.nome)
+        print("CPF:", self.cpf)
+        print("Data de Nascimento:", self.dt_nascimento)
+        print("Profissao:", self.profissao)
+        print("Renda:", self.renda)
+

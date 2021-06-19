@@ -5,6 +5,8 @@ class Tributavel(abc.ABC):
     As subclasses concretas devem sobrescrever o método get_valor_imposto.
     """
     @abc.abstractmethod
-    def get_valor_imposto(self, valor):
+    def get_valor_imposto(self):
         """ aplica taxa de imposto sobre um determinado valor do objeto """
         pass
+
+#help(Tributavel)

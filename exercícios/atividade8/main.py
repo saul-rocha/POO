@@ -1,103 +1,117 @@
-from funcionario import Funcionario
-from cliente import Cliente
-from conta_corrente import ContaCorrente
-from conta_poupanca import ContaPoupanca
-from historico import Historico
-from seguro_de_vida import SeguroDeVida
+from pessoa import Pessoa, Funcionario, Cliente
+from banco import Banco
+from conta import ContaCorrente, ContaPoupanca, SeguroDeVida
 from tributavel import Tributavel
-from cobrar_tributacao import CobrarTributacao
+
 
 def menu():
-    print("1 - Cadastrar Funcionário\n2 - Cadastrar Cliente\n3 - Criar Conta Corrente\n4 - Criar Conta Poupança\n5 - Criar Seguro de Vida\n"
-          "6 - Cobrar Tributação\n7 - Sacar\n8 - Depositar\n9 - Transferir\n10 - imprimir Historico\n11 - Status do Banco\n0 - Sair")
-    esc = int(input("Digite uma opção: "))
+    print("\n\n")
+    print("1....Cadastrar Funcionário")
+    print("2....Cadastrar Cliente")
+    print("3....Criar Conta Corrente")
+    print("4....Criar Conta Poupança")
+    print("5....Criar Seguro de Vida")
+    print("6....Cobrar Tributação")
+    print("7....Sacar")
+    print("8....Depositar")
+    print("9....Transferir")
+    print("10...Imprimir Historico de Uma Conta")
+    print("11...Exibir Informações do Banco")
+    print("12...Sair")
 
-    return esc
+    res = int(input("Digite uma opção: "))
 
-banco_funcionarios = {}
-banco_clientes = {}
-banco_CC = {}
-banco_CP = {}
-banco_SV = {}
+    return res
+
+def cadastrar_funcionario():
+    print("DIGITE OS DADOS DO FUNCIONÁRIO")
+    nome = input("Nome: ")
+    cpf = input("CPF: ")
+    dt_nascimento = input("Data de Nascimento: ")
+    salario = float(input("Salário: "))
+
+    p = Pessoa(nome, cpf, dt_nascimento)
+    f = Funcionario(p, salario)
+    banco.adicionar_funcionario(f)
 
 
+def cadastrar_cliente():
+    print("DIGITE OS DADOS DO CLIENTE")
+    nome = input("Nome: ")
+    cpf = input("CPF: ")
+    dt_nascimento = input("Data de Nascimento: ")
+    profissao = input("Profissão: ")
+    renda = float(input("Renda: "))
 
-while True:
-    op = menu()
+    p = Pessoa(nome, cpf, dt_nascimento)
+    c = Cliente(p, profissao, renda)
+    banco.adicionar_cliente(c)
 
-    if op == 1:#funcionario
-        print('Informe os dados do Funcionario: ')
-        nome = input('Infrome o nome: ')
-        cpf = input('Informe o CPF: ')
-        dt_nascimento = input('Informe a data de nascimento: ')
-        salario = float(input('Informe o salario: '))
-        banco_funcionarios.setdefault(cpf, Funcionario(nome, cpf, dt_nascimento, salario))
+def cadastrar_conta_corrente():
+    banco.mostrar_clientes()
 
-    elif op == 2:#cliente
-        print('Informe os dados do Cliente: ')
-        nome = input('Informe o nome: ')
-        cpf = input('Informe o CPF: ')
-        dt_nascimento = input('Informe a data de nascimento: ')
-        profissao = input('Informe a profissão: ')
-        renda = float(input('Informe a renda: '))
-        banco_clientes.setdefault(cpf, Cliente(nome, cpf, dt_nascimento, profissao, renda))
+    cpf = input("CPF do Cliente: ")
 
-    elif op  == 3:#Conta corrente
+    numero = input("Numero da Conta: ")
+    saldo = float(input("Saldo da Conta: "))
+    limite = float(input("Limite: "))
+    cc = ContaCorrente(banco.get_cliente(cpf), numero, saldo, limite)
+    banco.adicionar_conta_corrente(cc)
+    print("Conta Corrente Criada Com Sucesso!")
 
-        print('Informe os dados da conta corrente')
-        cpf = input("CPF do Cliente: ")
-        if cpf in banco_clientes.keys():
-            numero = input("Numero da Conta")
-            saldo = float(input('Informe o Saldo: '))
-            limite = float(input('Informe o Limite: '))
-            nome = input('Informe o nome: ')
-            cpf = input('Informe o CPF: ')
-            dt_nascimento = input('Informe a data de nascimento: ')
-            profissao = input('Informe a profissão: ')
-            renda = float(input('Informe a renda: '))
 
-            banco_CC.setdefault(cpf, ContaCorrente(numero, saldo, limite, nome, cpf, dt_nascimento, profissao, renda))
+def cadastrar_conta_poupanca():
+    banco.mostrar_clientes()
+
+    cpf = input("CPF do Cliente: ")
+
+    numero = input("Numero da Conta: ")
+    saldo = float(input("Saldo da Conta: "))
+
+    cp = ContaPoupanca(banco.get_cliente(cpf), numero, saldo)
+    banco.adicionar_conta_poupanca(cp)
+    print("Conta Poupança Criada Com Sucesso!")
+
+
+def cadastrar_seguro_de_vida():
+
+    banco.mostrar_clientes()
+
+    cpf = input("CPF do Cliente: ")
+
+    valor_mensal = float(input("Valor Mensal: "))
+    valor_total = float(input("Valor Total: "))
+
+    sv = SeguroDeVida(banco.adicionar_cliente(cpf), valor_mensal, valor_total)
+    banco.adicionar_seguro_de_vida(sv)
+
+def sacar():
+
+    banco.mostrar_clientes()
+##saca pelo cpf do cliente
+    cpf = input("CPF do Cliente: ")
+
+    valor = float(input("Valor: "))
+
+    if cpf in banco.lista_contas_poupancas.keys() and cpf in banco.lista_contas_correntes.keys():
+        escolha = int(input("1 - Conta Poupança || 2 - Conta Corrente: "))
+
+        if escolha == 1:
+            banco.sacar(cpf, banco.lista_contas_poupancas(cpf), valor)
         else:
-            print("Cliente não existe!")
-    elif op == 4:#Conta Poupança
-        print('Informe os dados da conta poupança')
-        cpf = input("CPF do Cliente: ")
-        if cpf in banco_clientes.keys():
-            numero = input("Numero da Conta")
-            saldo = float(input('Informe o Saldo: '))
-            limite = float(input('Informe o Limite: '))
-            nome = input('Informe o nome: ')
-            cpf = input('Informe o CPF: ')
-            data_nascimento = input('Informe a data de nascimento: ')
-            profissao = input('Informe a profissão: ')
-            renda = float(input('Informe a renda: '))
-            banco_CP.setdefault(cpf, ContaPoupanca(numero, saldo, limite, nome, cpf, dt_nascimento, profissao, renda))
-        else:
-            print("Cliente não existe!")
-    elif op == 5:
-        print('Informe os dados da Plano de Saude')
-        cpf = input("CPF do Cliente: ")
-        if cpf in banco_clientes.keys():
-            valor_mensal = int(input('Informe o valor mensal: '))
-            valor_total = int(input('Informe o valor total: '))
-            nome = input('Informe o nome: ')
-            cpf = input('Informe o CPF: ')
-            dt_nascimento = input('Informe a data de nascimento: ')
-            profissao = input('Informe a profissão: ')
-            renda = float(input('Informe a renda: '))
-            banco_SV.setdefault(cpf, SeguroDeVida(nome, cpf, dt_nascimento, profissao, renda, valor_mensal, valor_total))
-        else:
-            print("Cliente não existe!")
-    elif op == 6:
-        lista = []
-        cpf = input("informe o cpf: ")
-        if cpf in banco_CC.keys():
-            lista.append(banco_CC.items())
-            if cpf in banco_SV.keys():
-                lista.append(banco_SV.items())
-            total = CobrarTributacao.calculo_tributacao(lista, 1)
-            for a in total:
-                print(a)
+            banco.sacar(cpf, banco.lista_contas_correntes(cpf), valor)
 
-    elif op == 7:
-        
+
+
+
+
+banco = Banco()
+#Tributavel.register(ContaCorrente)
+#Tributavel.register(SeguroDeVida)
+
+
+cadastrar_cliente()
+
+cadastrar_conta_corrente()
+
+
