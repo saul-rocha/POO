@@ -1,7 +1,7 @@
 import abc
 from manipulador_tributaveis import ManipuladorDeTributaveis
 class Conta(abc.ABC):
-    def __init__(self, numero, titular, saldo, tipo, limite=1000.0, ):
+    def __init__(self, numero, titular, saldo, tipo, limite=1000.0):
         self._numero = numero
         self._titular = titular
         self._saldo = saldo

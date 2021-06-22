@@ -3,7 +3,7 @@ import datetime
 class Historico:
     def __init__(self):
         self._data_abertura = datetime.datetime.today()
-        self.transacoes = []
+        self._transacoes = []
 
     @property
     def data_abertura(self):
@@ -11,10 +11,12 @@ class Historico:
 
     @property
     def transacoes(self):
-        return self.transacoes()
+        return self._transacoes
 
     def imprime(self):
         print("data abertura: {}".format(self.data_abertura))
-        print("TRANSAÇÕES")
+        print("HISTORICO DE ATIVIDADES")
         for t in self.transacoes:
-            print(t, " - ")
+            print(t)
+
+

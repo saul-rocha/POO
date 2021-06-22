@@ -22,8 +22,8 @@ class Pessoa:
         print("Data de Nascimento:", self.dt_nascimento)
 
 class Funcionario(Pessoa):
-    def __init__(self, pessoa, salario):
-        super().__init__(pessoa.nome, pessoa.cpf, pessoa.dt_nascimento)
+    def __init__(self, nome, cpf, dt_nascimento, salario):
+        super().__init__(nome, cpf, dt_nascimento)
         self._salario = salario
 
     @property
@@ -38,8 +38,8 @@ class Funcionario(Pessoa):
 
 
 class Cliente(Pessoa):
-    def __init__(self, pessoa, profissao, renda):
-        super().__init__(pessoa.nome, pessoa.cpf, pessoa.dt_nascimento)
+    def __init__(self, nome, cpf, dt_nascimento, profissao, renda):
+        super().__init__(nome, cpf, dt_nascimento)
         self._profissao = profissao
         self._renda = renda
 
