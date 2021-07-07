@@ -1,7 +1,10 @@
+
 class Sistema:
+
     def __init__(self):
         self._motoristas = {}
         self._assistentes = {}
+        self._viagens = {}
         self._historico_viagens = []
 
 
@@ -17,7 +20,9 @@ class Sistema:
     @property
     def historico_viagens(self):
         return self._historico_viagens
-
+    @property
+    def viagens(self):
+        return self._viagens
 
     def add_motorista(self, motorista):
         if motorista.cpf in self.motoristas.keys():
@@ -32,3 +37,22 @@ class Sistema:
         else:
             self.assistentes[assistente.cpf] = assistente
             return True
+
+    def fazer_viagem(self, v, id_viagem):
+        self.viagens[id_viagem] = v
+
+    def consultar_funcionarios(self):
+        for key, motorista in self.motoristas.items():
+            print("__________________________")
+            motorista.imprime()
+            print("__________________________")
+
+        for key, assistente in self.assistentes.items():
+            print("__________________________")
+            assistente.imprime()
+            print("__________________________")
+
+    def mostrar_viagens(self):
+        for key, viagem in self.viagens.items():
+            viagem.mostrar_viagem()
+            print("---------------------------------------------")

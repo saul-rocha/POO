@@ -21,11 +21,11 @@ class Pessoa:
 
 class Cliente(Pessoa):
     def __init__(self, nome, idade, cpf):
-        super.__init__(nome, idade, cpf)
+        super().__init__(nome, idade, cpf)
 
 class Motorista(Pessoa):
     def __init__(self, nome, idade, cpf, salario, nivel_cnh):
-        super.__init__(nome, idade, cpf)
+        super().__init__(nome, idade, cpf)
         self._salario = salario
         self._nivel_cnh = nivel_cnh
 
@@ -37,20 +37,25 @@ class Motorista(Pessoa):
     def nivel_cnh(self):
         return self._nivel_cnh
 
+    def imprime(self):
+        print("Nome: {}\nIdade: {}\nCPF: {}\nSalario: {}\nNivel CNH: {}".format(self.nome, self.idade, self.cpf, self.salario, self.nivel_cnh))
+
 
 class Assistente(Pessoa):
     def __init__(self, nome, idade, cpf, salario):
-        super.__init__(nome, idade, cpf)
+        super().__init__(nome, idade, cpf)
         self._salario = salario
 
     @property
     def salario(self):
         return self._salario
 
+    def imprime(self):
+        print("Nome: {}\nIdade: {}\nCPF: {}\nSalario: {}".format(self.nome, self.idade, self.cpf, self.salario))
 
 class Gerente(Pessoa, Autenticavel):
     def __init__(self, nome, idade, cpf, login, senha):
-        super.__init__(nome, idade, cpf)
+        super().__init__(nome, idade, cpf)
         self._login = login
         self._senha = senha
 
@@ -68,5 +73,3 @@ class Gerente(Pessoa, Autenticavel):
             return True
         else:
             return False
-
-

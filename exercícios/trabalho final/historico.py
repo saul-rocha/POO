@@ -14,7 +14,9 @@ class Historico:
         return self._viagem
 
     def imprime(self):
-        print("DATA DA VIAGEM: {}".format(self.data_abertura))
+        print("DATA DA VIAGEM: {}".format(self.data_viagem))
         print("HISTORICO DE VIAGENS")
         for t in self.viagem:
+            print("____________________________")
             print(t)
+            print("____________________________")

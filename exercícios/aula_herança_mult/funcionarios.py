@@ -48,6 +48,9 @@ class Cliente(Autenticavel):
         return self._senha == senha
 
 class SistemaInterno:
+    def __init__(self, gerente):
+        self._gerente = gerente
+
     def login(self, obj, senha):
 
         if (hasattr(obj, 'autentica') and obj.autentica(senha)):
