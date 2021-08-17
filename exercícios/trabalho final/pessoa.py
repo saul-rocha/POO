@@ -59,6 +59,7 @@ class Gerente(Pessoa, Autenticavel):
         self._login = login
         self._senha = senha
 
+
     @property
     def login(self):
         return self._login
