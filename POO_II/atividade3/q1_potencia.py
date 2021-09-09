@@ -4,3 +4,4 @@ res = 1
 while(expo > 0):
     res *= base
     expo -= 1
+print(res)

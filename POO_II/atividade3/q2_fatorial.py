@@ -5,7 +5,7 @@ def fatorialR(num,res=1):# possui dois parametro, num é o valor para calcular o
 
         res = fatorialR(num-1,res*num) # num é decramentado na passagem de parâmetro e res acumula o resultado do produto
 
-    return res #retorna o resultado do fatorial
+    return res #retorna o r1esultado do fatorial
 
 
 print("Fatorial Recursivo", fatorialR(num))
