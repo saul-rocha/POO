@@ -1,4 +1,4 @@
-    import datetime
+import datetime
 
 class Historico:
     def __init__(self):
@@ -16,40 +16,76 @@ class Client:
         self._nome = nome
         self._sobrenome = sobrenome
         self._cpf = cpf
-##SET
-    def setNome(self):
+    @property
+    def nome(self):
         return self._nome
-
-    def setSobrenome(self):
+    @property
+    def sobrenome(self):
         return self._sobrenome
-
-    def setCpf(self):
+    @property
+    def cpf(self):
         return self._cpf
 ##GET
-    def getNome(self, nome):
+    @nome.setter
+    def nome(self, nome):
         self._nome = nome
-
-    def getSobrenome(self, sobrenome):
+    @sobrenome.setter
+    def sobrenome(self, sobrenome):
         self._sobrenome = sobrenome
-
-    def getCpf(self, cpf):
+    @cpf.setter
+    def cpf(self, cpf):
         self._cpf = cpf
 
 
     def imprimir(self):
-        print("nome: ", self._nome)
-        print("sobrenome: ", self._sobrenome)
-        print("cpf: ", self._cpf)
+        print("nome: ", self.nome)
+        print("sobrenome: ", self.sobrenome)
+        print("cpf: ", self.cpf)
 
 
 class Conta:
-
+    _qtd_contas = 0
+    __slots__ = ["_numero", "_titular", "_saldo", "_limite", "historico"]
     def __init__(self, numero, client, saldo = 0, limite = 100):
         self._numero = numero
         self._titular = client
         self._saldo = saldo
         self._limite = limite
-        self._historico = Historico()
+        self.historico = Historico()
+        Conta._qtd_contas += 1
+
+    @property
+    def numero(self):
+        return self._numero
+
+    @property
+    def titular(self):
+        return self._titular
+
+    @property
+    def saldo(self):
+        return self._saldo
+
+    @property
+    def limite(self):
+        return self._limite
+
+    @numero.setter
+    def numero(self, numero):
+        self._numero = numero
+
+    @titular.setter
+    def titular(self, cliente):
+        self._client = cliente
+
+    @saldo.setter
+    def saldo(self, saldo):
+        self._saldo = saldo
+
+    @limite.setter
+    def limite(self, limite):
+        self._limite = limite
+
 ##retorna True se foi efetuado e False caso não
     def deposita(self, valor):
         if valor < 0:
