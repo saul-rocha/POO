@@ -25,7 +25,7 @@ class Client:
     @property
     def cpf(self):
         return self._cpf
-##GET
+
     @nome.setter
     def nome(self, nome):
         self._nome = nome
