@@ -173,7 +173,7 @@ class Ui_TelaCadastro(object):
             self.lineEdit_7.setText(pessoa.endereco)
             self.lineEdit_8.setText(pessoa.nascimento)
         else:
-            QMessageBox.Information(None,'POOII', 'CPF não encontrado!')
+            QMessageBox.information(None,'POOII', 'CPF não encontrado!')
 
     def retranslateUi(self, TelaCadastro):
         _translate = QtCore.QCoreApplication.translate
